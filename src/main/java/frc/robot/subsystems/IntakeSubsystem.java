@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkFlex;
@@ -18,13 +19,15 @@ import frc.robot.Constants.IntakeSubsystemConstants.ConveyorSetpoints;
 import frc.robot.Constants.IntakeSubsystemConstants.IntakeSetpoints;
 
 public class IntakeSubsystem extends SubsystemBase {
-  // Initialize intake SPARK. We will use open loop control for this.
+  // Initialize intake SPARK. We will use open loop control for this. 
   private SparkFlex intakeMotor =
-      new SparkFlex(IntakeSubsystemConstants.kIntakeMotorCanId, MotorType.kBrushless);
+     new SparkFlex(IntakeSubsystemConstants.kIntakeMotorCanId, MotorType.kBrushless);
 
   // Initialize conveyor SPARK. We will use open loop control for this.
-  private SparkFlex conveyorMotor =
-      new SparkFlex(IntakeSubsystemConstants.kConveyorMotorCanId, MotorType.kBrushless);
+  private TalonFX conveyorMotor =
+      new TalonFX(0); 
+  // private SparkFlex conveyorMotor =
+     // new SparkFlex(IntakeSubsystemConstants.kConveyorMotorCanId, MotorType.kBrushless);
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {

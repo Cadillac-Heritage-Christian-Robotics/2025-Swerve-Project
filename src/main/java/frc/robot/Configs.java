@@ -12,6 +12,27 @@ public final class Configs {
     public static final SparkMaxConfig turningConfig = new SparkMaxConfig();
 
   }
+  
+  public static final class IntakeSubsystem {
+    public static final SparkFlexConfig intakeConfig = new SparkFlexConfig();
+    public static final SparkFlexConfig conveyorConfig = new SparkFlexConfig();
+
+    static {
+      // Configure basic settings of the intake motor
+      intakeConfig
+        .inverted(false)
+        .idleMode(IdleMode.kCoast)
+        .openLoopRampRate(0.5)
+        .smartCurrentLimit(40);
+
+      // Configure basic settings of the conveyor motor
+      conveyorConfig
+        .inverted(true)
+        .idleMode(IdleMode.kCoast)
+        .openLoopRampRate(0.5)
+        .smartCurrentLimit(40);
+    }
+  }
 
   public static final class CoralSubsystem {
     public static final SparkMaxConfig armConfig = new SparkMaxConfig();

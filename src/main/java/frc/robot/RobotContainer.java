@@ -87,29 +87,43 @@ public class RobotContainer {
 
         /*** OPERATOR CONTROLS ***/
 
+    // Right Trigger -> Run fuel intake in reverse
+    m_operatorController
+      .rightTrigger(OIConstants.kTriggerButtonThreshold)
+      .whileTrue(m_intake.runIntakeCommand());
+
+    // Left Trigger -> Run fuel intake in reverse
+    m_operatorController
+      .leftTrigger(OIConstants.kTriggerButtonThreshold)
+      .whileTrue(m_intake.runExtakeCommand());
+
+    // Y Button -> Run intake and run the shooter flywheel and feeder
+    m_operatorController.y().toggleOnTrue(m_shooter.runShooterCommand().alongWith(m_intake.runIntakeCommand()));
+
+
         // B Button -> Elevator/Arm to human player position, set ball intake to stow when idle
         
-        // Right Trigger -> Run ball intake, set to leave out when idle
-        m_operatorController
-                .rightTrigger(Constants.kTriggerButtonThreshold)
-                .whileTrue(m_algaeSubsystem.runIntakeCommand());
+        // // Right Trigger -> Run ball intake, set to leave out when idle
+        // // m_operatorController
+        //         // .rightTrigger(Constants.kTriggerButtonThreshold)
+        //         // .whileTrue(m_algaeSubsystem.runIntakeCommand());
 
-        // Left Trigger -> Run ball intake in reverse, set to stow when idle
-        m_operatorController
-                .leftTrigger(Constants.kTriggerButtonThreshold)
-                .whileTrue(m_algaeSubsystem.reverseIntakeCommand());
+        // // Left Trigger -> Run ball intake in reverse, set to stow when idle
+        // m_operatorController
+        //         .leftTrigger(Constants.kTriggerButtonThreshold)
+        //         .whileTrue(m_algaeSubsystem.reverseIntakeCommand());
 
-        m_operatorController.b().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kFeederStation)
-                .alongWith(m_algaeSubsystem.stowCommand()));
+        // m_operatorController.b().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kFeederStation)
+        //         .alongWith(m_algaeSubsystem.stowCommand()));
 
-        // A Button -> Elevator/Arm to level 2 position
-        m_operatorController.a().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kLevel2));
+        // // A Button -> Elevator/Arm to level 2 position
+        // m_operatorController.a().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kLevel2));
 
-        // X Button -> Elevator/Arm to level 3 position
-        m_operatorController.x().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kLevel3));
+        // // X Button -> Elevator/Arm to level 3 position
+        // m_operatorController.x().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kLevel3));
 
-        // Y Button -> Elevator/Arm to level 4 position
-        m_operatorController.y().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kLevel4));
+        // // Y Button -> Elevator/Arm to level 4 position
+        // m_operatorController.y().onTrue(m_coralSubSystem.setSetpointCommand(Setpoint.kLevel4));
 
 
     } // end of configureBindings

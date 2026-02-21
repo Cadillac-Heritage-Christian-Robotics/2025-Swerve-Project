@@ -35,6 +35,26 @@ public final class Constants {
     }
   }
 
+    public static final class ShooterSubsystemConstants {
+    public static final int kFeederMotorCanId = 5;    // SPARK Flex CAN ID
+    public static final int kFlywheelMotorCanId = 6;  // SPARK Flex CAN ID (Right)
+    public static final int kFlywheelFollowerMotorCanId = 7;  // SPARK Flex CAN ID (Left)
+
+    public static final class FeederSetpoints {
+      public static final double kFeed = 0.95;
+    }
+
+    public static final class FlywheelSetpoints {
+      public static final double kShootRpm = 5000;
+      public static final double kVelocityTolerance = 100;
+    }
+  }
+
+    public static final class NeoMotorConstants {
+    public static final double kFreeSpeedRpm = 5676;
+    public static final double kVortexKv = 565;   // rpm/V
+  }
+
 
   /***** CORAL *******************/
   public static final class CoralSubsystemConstants {

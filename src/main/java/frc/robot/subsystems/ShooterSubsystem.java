@@ -9,12 +9,16 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.StatusSignal;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -38,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
    // private SparkFlex flywheelMotor =
       // new SparkFlex(ShooterSubsystemConstants.kFlywheelMotorCanId, MotorType.kBrushless);
   //private SparkClosedLoopController flywheelController = flywheelMotor.getClosedLoopController();
-  //private RelativeEncoder flywheelEncoder = flywheelMotor.getEncoder();
+  private RelativeEncoder flywheelEncoder = flywheelMotor.getEncoder();
   private TalonFX flywheelFollowerMotor =
     new TalonFX(0);
 
@@ -82,15 +86,15 @@ public class ShooterSubsystem extends SubsystemBase {
         // PersistMode.kPersistParameters);
 
     // Zero flywheel encoder on initialization
-    // flywheelEncoder.setPosition(0);
+    flywheelEncoder.setPosition(0);
    }
     // System.out.println("---> ShooterSubsystem initialized");
   
    
   private boolean isFlywheelAt(double velocity){
      return MathUtil.isNear(flywheelEncoder.getVelocity(), 
-            velocity, FlywheelSetpoints.kVelocityTolerance);
-  }
+            velocity, FlywheelSetpoints.kVelocityTolerance);}
+  
   
 
   /** 
@@ -103,6 +107,7 @@ public class ShooterSubsystem extends SubsystemBase {
    public final Trigger isFlywheelSpinningBackwards = new Trigger(
        () -> isFlywheelAt(-5000) || flywheelEncoder.getVelocity() < -5000
    );
+  
 
   /** 
    * Trigger: Is the flywheel stopped?

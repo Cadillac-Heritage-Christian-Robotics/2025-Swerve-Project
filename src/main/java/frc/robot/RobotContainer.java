@@ -15,6 +15,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.AlgaeSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.CoralSubsystem.Setpoint;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -23,8 +24,10 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
 
     // Subsystems
-    private final CoralSubsystem m_coralSubSystem = new CoralSubsystem();
-    private final AlgaeSubsystem m_algaeSubsystem = new AlgaeSubsystem();
+    //private final CoralSubsystem m_coralSubSystem = new CoralSubsystem();
+    //private final AlgaeSubsystem m_algaeSubsystem = new AlgaeSubsystem();
+    private final IntakeSubsystem m_intake = new IntakeSubsystem();
+    private final ShooterSubsystem m_shooter = new ShooterSubsystem();
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second
@@ -58,7 +61,7 @@ public class RobotContainer {
         configureBindings();
 
         // Set the default commands for a algae
-        m_algaeSubsystem.setDefaultCommand(m_algaeSubsystem.idleCommand());
+       // m_algaeSubsystem.setDefaultCommand(m_algaeSubsystem.idleCommand());
     }
 
     private void configureBindings() {
@@ -80,10 +83,10 @@ public class RobotContainer {
         m_driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         // Left Bumper -> Run tube intake
-        m_driverController.leftBumper().whileTrue(m_coralSubSystem.runIntakeCommand());
+       // m_driverController.leftBumper().whileTrue(m_coralSubSystem.runIntakeCommand());
 
         // Right Bumper -> Run tube intake in reverse
-        m_driverController.rightBumper().whileTrue(m_coralSubSystem.reverseIntakeCommand());
+        //m_driverController.rightBumper().whileTrue(m_coralSubSystem.reverseIntakeCommand());
 
         /*** OPERATOR CONTROLS ***/
 
